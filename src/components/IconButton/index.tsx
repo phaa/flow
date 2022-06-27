@@ -16,8 +16,8 @@ export function IconButton({ icon, ...rest }: Props) {
     <Container {...rest}>
       <MaterialIcons
         name={icon}
-        size={18}
-        color={COLORS.WHITE}
+        size={28}
+        color={COLORS.SUBTEXT}
       />
     </Container>
   )

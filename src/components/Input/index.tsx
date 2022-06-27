@@ -1,8 +1,23 @@
 import React from 'react';
 import { TextInputProps } from 'react-native';
 
-import { Container } from './styles';
+import { Container, CustomInput, Label, FeedbackText } from './styles';
 
-export function Input({ ...rest }: TextInputProps) {
-  return <Container {...rest} />
+type Props = TextInputProps & {
+  label: string;
+  feedbackText?: string;
+};
+
+export function Input({ label, feedbackText="", ...rest }: Props) {
+  return (
+    <Container>
+      <Label>{label}</Label>
+      <CustomInput {...rest} />
+      { feedbackText!="" && (
+        <FeedbackText>{feedbackText}</FeedbackText>
+      )}
+      
+    </Container>
+    
+  );
 }
