@@ -10,7 +10,7 @@ export function Home() {
   const navigation = useNavigation();
 
   function handleNewOrder() {
-    navigation.navigate("new");
+    navigation.navigate("form1");
   }
 
   return (

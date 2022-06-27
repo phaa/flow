@@ -2,6 +2,7 @@ import styled from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
 export const Container = styled.View`
+  margin-top: 8px;
 `;
 
 export const Label = styled.Text`

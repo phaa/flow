@@ -11,7 +11,7 @@ export default {
     SUBTEXT: '#8D919E',
 
     WHITE: '#FFFFFF',
-    BORDER: '#C5CADA'
+    BORDER: '#dedede'
   }, 
   FONTS: {
     POPPINS: 'Poppins-Regular',

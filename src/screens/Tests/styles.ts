@@ -9,15 +9,12 @@ export const Container = styled(SafeAreaView)`
 
 export const Header = styled.View`
   width: 100%;
-  padding-top: 13px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  padding-right: 0px;
 `;
 
-export const IconWrapper = styled.View`
+export const TitleWrapper = styled.View`
   position: absolute;
-  
+  width: 100%;
+  margin-top: 13px
 `;
 
 export const Title = styled.Text`
@@ -25,7 +22,8 @@ export const Title = styled.Text`
   font-weight: bold;
   color: ${({ theme }) => theme.COLORS.TEXT};
   text-align: center;
-  margin-bottom: 25px;
+  margin-top: 0px;
+  margin-bottom: 0px;
 `;
 
 export const Form = styled(ScrollView)`
