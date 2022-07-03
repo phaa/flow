@@ -1,10 +1,16 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 import { IconButton } from '../IconButton';
 
 import { Container, Greeting, Title, SubTitle } from './styles';
 
 export function Header() {
+  const navigation = useNavigation();
+
+  function handleLogout() {
+    navigation.navigate("login");
+  }
 
   return (
     <Container>
@@ -13,7 +19,7 @@ export function Header() {
         <SubTitle>Acompanhe suas respostas aos formulários</SubTitle>
       </Greeting>
 
-      <IconButton icon="logout" />
+      <IconButton icon="logout" onPress={handleLogout}/>
     </Container>
   );
 }

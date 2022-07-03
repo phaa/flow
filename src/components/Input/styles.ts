@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { TextInput, TextInputProps } from 'react-native';
 
 export const Container = styled.View`
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 `;
 
 export const CustomInput = styled(TextInput).attrs<TextInputProps>(({ theme }) => ({
@@ -12,16 +12,17 @@ export const CustomInput = styled(TextInput).attrs<TextInputProps>(({ theme }) =
   height: 40px;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
   border-radius: 0px;
-  font-size: 14px;
+  font-size: 16px;
   padding: 0 0;
-  border-bottom-width: 2px;
-  border-bottom-color: ${({ theme }) => theme.COLORS.BORDER}
+  border-bottom-width: 1px;
+  border-bottom-color: ${({ theme }) => theme.COLORS.BORDER2}
   color: ${({ theme }) => theme.COLORS.TEXT};
 `; 
 
 export const Label = styled.Text`
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
+  color: ${({ theme }) => theme.COLORS.TEXT};
 `;
 
 export const FeedbackText = styled.Text`

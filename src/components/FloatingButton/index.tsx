@@ -7,7 +7,7 @@ import { MaterialIcons } from '@expo/vector-icons';
 
 type Props = {
   icon: keyof typeof MaterialIcons.glyphMap;
-  onPress: () => void,
+  onPress: () => void;
 };
 
 export function FloatingButton({ icon, onPress }: Props) {

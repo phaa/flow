@@ -6,13 +6,17 @@ import { Container, CustomInput, Label, FeedbackText } from './styles';
 type Props = TextInputProps & {
   label: string;
   feedbackText?: string;
+  noInput?: boolean;
 };
 
-export function Input({ label, feedbackText="", ...rest }: Props) {
+export function Input({ label, feedbackText="", noInput, ...rest }: Props) {
   return (
     <Container>
       <Label>{label}</Label>
-      <CustomInput {...rest} />
+      { !noInput && (
+        <CustomInput {...rest} />
+      )}
+      
       { feedbackText!="" && (
         <FeedbackText>{feedbackText}</FeedbackText>
       )}

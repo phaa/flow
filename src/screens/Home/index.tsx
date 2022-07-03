@@ -18,7 +18,7 @@ export function Home() {
       <Header />
       <Orders />
 
-      <FloatingButton icon="logout" onPress={handleNewOrder}/>
+      <FloatingButton icon="add" onPress={handleNewOrder}/>
     </Container>
   );
 }

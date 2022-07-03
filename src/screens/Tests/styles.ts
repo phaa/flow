@@ -1,15 +1,15 @@
-import { ScrollView } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, ScrollView } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
   justify-content:center;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
 export const Header = styled.View`
   width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
+  margin-top: 20px;
 `;
 
 export const TitleWrapper = styled.View`
@@ -27,7 +27,11 @@ export const Title = styled.Text`
   margin-bottom: 0px;
 `;
 
-export const Form = styled(ScrollView)`
+export const Form = styled.View`
   flex: 1;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
+`;
+
+export const Slide = styled(ScrollView)`
+  padding: 20px;
 `;

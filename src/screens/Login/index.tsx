@@ -11,8 +11,8 @@ import { Input } from '../../components/Input';
 export function Login() {
   const navigation = useNavigation();
 
-  function handleNewOrder() {
-    navigation.navigate("new");
+  function handleGoHome() {
+    navigation.navigate("home");
   }
 
   function gotoPasswordRecovery() {
@@ -34,12 +34,12 @@ export function Login() {
           />
           <Input
             label="Senha"
-            placeholder="Digite uma senha"
+            placeholder="Digite sua senha"
             secureTextEntry={true}
           />
           <Button
             title="Entrar"
-            onPress={handleNewOrder}
+            onPress={handleGoHome}
           />
           <Subtext>Esqueceu a senha? <AltSubtext>Recupere aqui</AltSubtext></Subtext>
         
