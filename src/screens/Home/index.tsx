@@ -4,7 +4,7 @@ import { Container } from './styles';
 
 import { Header } from '../../components/Header';
 import { Orders } from '../../components/Orders';
-import { Button } from '../../components/Button';
+import { FloatingButton } from '../../components/FloatingButton';
 
 export function Home() {
   const navigation = useNavigation();
@@ -18,10 +18,7 @@ export function Home() {
       <Header />
       <Orders />
 
-      <Button
-        title="Novo chamado"
-        onPress={handleNewOrder}
-      />
+      <FloatingButton icon="logout" onPress={handleNewOrder}/>
     </Container>
   );
 }

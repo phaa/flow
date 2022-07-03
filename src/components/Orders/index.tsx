@@ -9,15 +9,51 @@ import { Container, Header, Title, Counter } from './styles';
 
 export function Orders() {
   const [isLoading, setIsLoading] = useState(false);
-  const [orders, setOrders] = useState<OrderProps[]>([]);
+  const [orders, setOrders] = useState<OrderProps[]>([
+    {
+      _id: '1',
+      patrimony: 'MInha casa',
+      equipment: 'Formulário 1',
+      status: 'closed',
+      description: 'Desrição',
+      created_at: new Date()
+    },
+    {
+      _id: '2',
+      patrimony: 'MInha casa',
+      equipment: 'Formulário 2',
+      status: 'open',
+      description: 'Desrição',
+      created_at: new Date()
+    },
+    {
+      _id: '3',
+      patrimony: 'MInha casa',
+      equipment: 'Formulário 3',
+      status: 'closed',
+      description: 'Desrição',
+      created_at: new Date()
+    },
+    {
+      _id: '4',
+      patrimony: 'MInha casa',
+      equipment: 'Formulário 4',
+      status: 'closed',
+      description: 'Desrição',
+      created_at: new Date()
+    },
+  ]);
   const [status, setStatus] = useState('open');
+
+  //{status === 'open' ? 'aberto' : 'encerrado'}
 
   return (
     <Container>
       <Filters onFilter={setStatus} />
 
       <Header>
-        <Title>Chamados {status === 'open' ? 'aberto' : 'encerrado'}</Title>
+        
+        <Title>Formulários preenchidos:</Title>
         <Counter>{orders.length}</Counter>
       </Header>
 

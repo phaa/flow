@@ -9,6 +9,7 @@ export const Container = styled(SafeAreaView)`
 
 export const Header = styled.View`
   width: 100%;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
 export const TitleWrapper = styled.View`

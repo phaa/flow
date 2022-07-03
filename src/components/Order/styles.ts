@@ -18,8 +18,9 @@ export const Content = styled.View`
   height: 94px;
   padding: 0 15px;
   justify-content: center;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
   background-color: ${({ theme }) => theme.COLORS.WHITE};
-  border-radius: 10px;
 `;
 
 export const Header = styled.View`
@@ -27,8 +28,10 @@ export const Header = styled.View`
 `;
 
 export const Status = styled.View<OrderStyleProps>`
-  width: 10px;
+  width: 11px;
   height: 94px;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
   background-color: ${({ theme, status }) => status === 'open' ? theme.COLORS.SECONDARY : theme.COLORS.PRIMARY};
 `;
 
