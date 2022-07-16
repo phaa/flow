@@ -16,8 +16,8 @@ export function MyStepIndicator({ ...rest }) {
   const [position, setPosition] = useState<number>(0);
 
   // Se a posição for alterada devido a uma modificação nas props, atualize
-  useEffect(() => {
-  });
+  //useEffect(() => {
+  //});
   
   const firstIndicatorStyles = {
     stepIndicatorSize: 30,
@@ -44,9 +44,9 @@ export function MyStepIndicator({ ...rest }) {
   };
 
   // Se a posição for alterada por um clique no step, atualize
-  function onStepPress (position: number) {
-    setPosition(position);
-  };
+  //function onStepPress (position: number) {
+  //  setPosition(position);
+  //};
 
   function renderLabel({ position, label, currentPosition }: LabelControl) {
     return (

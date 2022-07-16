@@ -31,7 +31,7 @@ export default function Form6(props) {
               />
               
               <Text style={styles.Txt571}>Desde a sua última notificação, aconteceu alguma coisa ou você fez
-              alguma coisa que possa ter afetado a maneiracomo se sente?</Text>
+              alguma coisa que possa ter afetado a maneira como se sente?</Text>
               <TextInput
                 style={styles.input}
                 placeholder="Comente..."

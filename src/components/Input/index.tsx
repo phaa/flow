@@ -25,3 +25,13 @@ export function Input({ label, feedbackText="", noInput, ...rest }: Props) {
     
   );
 }
+
+export function BareLabel(props) {
+  return (
+    <Container>
+      <Label>{props.label}</Label>
+      { props.children }
+    </Container>
+    
+  );
+}

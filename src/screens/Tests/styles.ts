@@ -35,3 +35,21 @@ export const Form = styled.View`
 export const Slide = styled(ScrollView)`
   padding: 20px;
 `;
+
+export const SliderDot = styled.View`
+  background-color: ${({ theme }) => theme.COLORS.BORDER};
+  width: 0px;
+  height: 0px;
+  border-radius: 7px;
+  margin-left: 7px;
+  margin-right: 7px;
+`;
+
+export const SliderActiveDot = styled.View`
+  background-color: ${({ theme }) => theme.COLORS.PRIMARY};
+  width: 0px;
+  height: 0px;
+  border-radius: 7px;
+  margin-left: 7px;
+  margin-right: 7px;
+`;
