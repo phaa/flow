@@ -20,7 +20,7 @@ export enum AuthState {
 export function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { user, signUp, signIn } = useAuth();
+  const { user, signUp, signIn, authState } = useAuth();
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -34,8 +34,14 @@ export function Login() {
     navigation.navigate("new");
   }
 
-  function gotoRegister() {
-    navigation.navigate("register");
+  function handleLogin() {
+    signIn(email, password);
+    navigation.navigate("home");
+  }
+
+  function handleRegister() {
+    signUp(email, password);
+    navigation.navigate("home");
   }
 
   return (

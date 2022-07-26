@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import Realm from "realm";
-import realm from "../RealmApp";
+import { getRealmApp } from "../realm";
 
 /**
  * Cria um novo Context que vai ser servido aos filhos de AuthProvider
@@ -26,6 +26,7 @@ type Props = {
 }
 
 const AuthProvider = ({ children }: Props) => {
+  const realm = getRealmApp();
   const [authState, setAuthState] = useState(AuthState.None);
   const [user, setUser] = useState(realm.currentUser);
   const realmRef = useRef(null);
@@ -116,7 +117,14 @@ const AuthProvider = ({ children }: Props) => {
   };
 
   return (
-    <AuthContext.Provider value={{ signUp, signIn, signOut, user }}>
+    <AuthContext.Provider
+      value={{
+        signUp,
+        signIn,
+        signOut,
+        user
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
