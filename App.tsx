@@ -1,6 +1,7 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeProvider } from 'styled-components/native';
+import { AuthProvider } from './src/providers/AuthProvider';
 
 import { Routes } from './src/routes';
 
@@ -10,8 +11,10 @@ export default function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar style="dark" translucent backgroundColor={theme.COLORS.BACKGROUND} />
-      <Routes />
+      <AuthProvider>
+        <StatusBar style="dark" translucent backgroundColor={theme.COLORS.BACKGROUND} />
+        <Routes />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

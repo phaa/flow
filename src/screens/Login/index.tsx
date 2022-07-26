@@ -1,19 +1,34 @@
-import React from 'react';
+import React, { useCallback, useState, useEffect } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { useNavigation } from '@react-navigation/native';
+import { useAuth } from "../../providers/AuthProvider";
+
 import { Container, RoundContainer, Form, Subtext, BottomWrapper, AltSubtext } from '../../components/BaseComponents/styles';
 
 import { AuthHeader } from '../../components/AuthHeader';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 
+export enum AuthState {
+  None,
+  Loading,
+  LoginError,
+  RegisterError,
+}
+
 export function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const { user, signUp, signIn } = useAuth();
   const navigation = useNavigation();
 
-  function handleGoHome() {
-    navigation.navigate("home");
-  }
+  useEffect(() => {
+    // Se já houver um usuário logado, pular para a página dos formulários.
+    if (user != null) {
+      navigation.navigate("home");
+    }
+  }, [user]);
 
   function gotoPasswordRecovery() {
     navigation.navigate("new");
@@ -30,18 +45,44 @@ export function Login() {
         <Form>
           <Input
             label="Email"
+            value={email}
+            onChangeText={setEmail}
+            autoCompleteType="email"
+            textContentType="emailAddress"
+            autoCapitalize="none"
+            autoCorrect={false}
             placeholder="Digite seu email"
           />
           <Input
             label="Senha"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            autoCompleteType="password"
+            textContentType="password"
             placeholder="Digite sua senha"
-            secureTextEntry={true}
           />
+          
           <Button
-            title="Entrar"
-            onPress={handleGoHome}
+            title="Login"
+            onPress={handleLogin}
           />
-          <Subtext>Esqueceu a senha? <AltSubtext>Recupere aqui</AltSubtext></Subtext>
+
+          <Button
+            title="Registrar"
+            onPress={handleRegister}
+          />
+
+          {authState === AuthState.LoginError && (
+            <Subtext>
+              There was an error logging in, please try again
+            </Subtext>
+          )}
+          {authState === AuthState.RegisterError && (
+            <Subtext>
+              There was an error registering, <AltSubtext>please try again</AltSubtext>
+            </Subtext>
+          )}
         
           <BottomWrapper>
             <TouchableOpacity onPress={gotoRegister}>
