@@ -1,22 +1,27 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
+
+// Firebase Authentication
+import auth from '@react-native-firebase/auth';
 
 import { IconButton } from '../IconButton';
-
 import { Container, Greeting, Title, SubTitle } from './styles';
 
-export function Header() {
-  const navigation = useNavigation();
+type HeaderType = {
+  userName: string;
+  userEmail: string;
+}
 
+export const Header: React.FC<HeaderType> = ({ userName, userEmail }) => {
+  
   function handleLogout() {
-    navigation.navigate("login");
+    auth().signOut();
   }
 
   return (
     <Container>
       <Greeting>
-        <Title>Bem vindo, Pedro</Title>
-        <SubTitle>Acompanhe suas respostas aos formulários</SubTitle>
+        <Title>{userName}</Title>
+        <SubTitle>{userEmail}</SubTitle>
       </Greeting>
 
       <IconButton icon="logout" onPress={handleLogout}/>

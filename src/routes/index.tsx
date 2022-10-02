@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 
-import { AppRoutes } from './app.routes';
+// Firebase Authentication
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
 
-export function Routes() {
+// Stacks para cada situação de usuário
+import { AuthStack } from './authStack';
+import { UserStack } from './userStack';
+
+export const Routes: React.FC = () => {
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(setUser);
+    return subscriber; // retorna uma função de limpeza para subscriber
+  });
+
   return (
     <NavigationContainer>
-      <AppRoutes />
+      {user ? <UserStack /> : <AuthStack />}
     </NavigationContainer>
   );
 }

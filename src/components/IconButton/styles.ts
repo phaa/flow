@@ -7,7 +7,6 @@ export const Container = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   border-radius: 12px;
-  
 `;
 
 //background-color: ${({ theme }) => theme.COLORS.PRIMARY};

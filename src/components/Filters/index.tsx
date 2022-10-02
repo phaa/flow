@@ -13,19 +13,19 @@ export function Filters({ onFilter }: Props) {
 
   return (
     <Container>
-      <Title>Filtre pelas datas dos formulários</Title>
+      <Title>Filtre pelo status dos formulários</Title>
 
       <Options>
         <Filter
-          title="Ascendente"
+          title="Pendente"
           backgroundColor={theme.COLORS.PRIMARY}
-          onPress={() => onFilter('open')}
+          onPress={() => onFilter('pending')}
         />
 
         <Filter
-          title="Decrescente"
+          title="Finalizado"
           backgroundColor={theme.COLORS.SECONDARY}
-          onPress={() => onFilter('closed')}
+          onPress={() => onFilter('finished')}
         />
       </Options>
     </Container>

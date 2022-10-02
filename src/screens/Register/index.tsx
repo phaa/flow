@@ -1,55 +1,79 @@
-import React, { useCallback, useState } from 'react';
-import { TouchableOpacity } from 'react-native';
-
+import React, { useState } from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { Realm } from '@realm/react';
-import { getRealmApp } from '../../realm';
 
-import { Container, RoundContainer, Form, Subtext, BottomWrapper, AltSubtext } from '../../components/BaseComponents/styles';
+// Firebase Authentication
+import auth from '@react-native-firebase/auth';
 
+// Custom components
+import { Container, RoundContainer, Form, Subtext, AltSubtext } from '../../components/BaseComponents/styles';
 import { AuthHeader } from '../../components/AuthHeader';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 
-export enum AuthState {
-  None,
-  Loading,
-  LoginError,
-  RegisterError,
-}
-
-export function Login() {
-  const app = getRealmApp();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [authState, setAuthState] = useState(AuthState.None);
-
-  // If the user presses "register" from the auth screen, try to register a
-  // new account with the  supplied credentials and login as the newly created user
-  const handleRegister = useCallback(async () => {
-    setAuthState(AuthState.Loading);
-
-    try {
-      // Register the user...
-      await app.emailPasswordAuth.registerUser({email, password});
-      // ...then login with the newly created user
-      const credentials = Realm.Credentials.emailPassword(email, password);
-
-      await app.logIn(credentials);
-      setAuthState(AuthState.None);
-    } catch (e) {
-      console.log('Error registering', e);
-      setAuthState(AuthState.RegisterError);
-    }
-  }, [email, password, setAuthState, app]);
-
+export const Register: React.FC = () => {
   const navigation = useNavigation();
+  const [name, setName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  function handleRegister() {
+    if (name === '' || email === '' || password === '') {
+      setError('Por favor, preencha todos os campos.');
+      return;
+    }
+
+    setIsLoading(true);
+
+    auth().createUserWithEmailAndPassword(email, password)
+    .then((result) => {
+      return result.user.updateProfile({
+        // É possivel colocar outros campos, ver documentação
+        // https://rnfirebase.io/reference/auth/user
+        displayName: name
+      })
+    })
+    .catch((error) => {
+      if (error.code === "auth/email-already-in-use") {
+        setError("Esse e-mail já está cadastrado.");
+      }
+
+      if (error.code === "auth/invalid-email") {
+        setError("E-mail inválido.");
+      }
+
+      console.error(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
+    
+  }
+
+  function handleRedirectToLogin() {
+    navigation.navigate("login")
+  }
 
   return (
     <Container>
-      <AuthHeader title="Login"/>
+
+      <AuthHeader title="Registrar"/>
+
       <RoundContainer>
+
         <Form>
+
+          <Input
+            label="Nome"
+            value={name}
+            onChangeText={setName}
+            autoCapitalize="words"
+            autoCorrect={false}
+            placeholder="Digite seu primeiro nome ou apelido"
+          />
+
           <Input
             label="Email"
             value={email}
@@ -60,6 +84,7 @@ export function Login() {
             autoCorrect={false}
             placeholder="Digite seu email"
           />
+
           <Input
             label="Senha"
             value={password}
@@ -69,18 +94,26 @@ export function Login() {
             textContentType="password"
             placeholder="Digite sua senha"
           />
+
           <Button
-            title="Entrar"
+            title="Registrar"
             onPress={handleRegister}
+            isLoading={isLoading}
           />
 
-          {authState === AuthState.RegisterError && (
-            <Subtext>
-              There was an error registering, <AltSubtext>please try again</AltSubtext>
-            </Subtext>
+          {error !== '' && (
+            <AltSubtext>{error}</AltSubtext>
           )}
+          <TouchableOpacity onPress={handleRedirectToLogin}>
+
+            <Subtext>Já tem uma conta? <AltSubtext>Faça login</AltSubtext></Subtext>
+
+          </TouchableOpacity>
+
         </Form>
+
       </RoundContainer>
+      
     </Container>
   );
 }

@@ -4,15 +4,18 @@ import { TextInputProps } from 'react-native';
 import { Container, CustomInput, Label, FeedbackText } from './styles';
 
 type Props = TextInputProps & {
-  label: string;
+  label?: string;
   feedbackText?: string;
   noInput?: boolean;
 };
 
-export function Input({ label, feedbackText="", noInput, ...rest }: Props) {
+export function Input({ label="", feedbackText="", noInput, ...rest }: Props) {
   return (
     <Container>
-      <Label>{label}</Label>
+      { label!="" && (
+        <Label>{label}</Label>
+      )}
+      
       { !noInput && (
         <CustomInput {...rest} />
       )}

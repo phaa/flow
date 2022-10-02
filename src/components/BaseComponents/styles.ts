@@ -25,6 +25,7 @@ export const Subtext = styled.Text`
 `;
 
 export const AltSubtext = styled.Text`
+  font-size: 15px;
   color: ${({ theme }) => theme.COLORS.PRIMARY};
   align-self: center;
   margin-top: 20px;

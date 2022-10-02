@@ -1,47 +1,61 @@
-import React, { useCallback, useState, useEffect } from 'react';
-import { TouchableOpacity } from 'react-native';
-
+import React, { useState } from 'react';
+import { Alert, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { useAuth } from "../../providers/AuthProvider";
 
+// Firebase Authentication
+import auth from '@react-native-firebase/auth';
+
+// Styled Components
 import { Container, RoundContainer, Form, Subtext, BottomWrapper, AltSubtext } from '../../components/BaseComponents/styles';
 
+// Custom components
 import { AuthHeader } from '../../components/AuthHeader';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 
-export enum AuthState {
-  None,
-  Loading,
-  LoginError,
-  RegisterError,
-}
-
-export function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const { user, signUp, signIn, authState } = useAuth();
+export const Login: React.FC = () => {
   const navigation = useNavigation();
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  useEffect(() => {
-    // Se já houver um usuário logado, pular para a página dos formulários.
-    if (user != null) {
-      navigation.navigate("home");
+  function handleSignIn() {
+    if (email === "" || password === "") {
+      setError("Preencha os campos de e-mail e senha.");
+      return;
     }
-  }, [user]);
 
-  function gotoPasswordRecovery() {
-    navigation.navigate("new");
+    setIsLoading(true);
+
+    auth().signInWithEmailAndPassword(email, password)
+    .then(() => {
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   }
 
-  function handleLogin() {
-    signIn(email, password);
-    navigation.navigate("home");
+  function handleForgotPassword() {
+    if (email === "") {
+      Alert.alert("Redefinir senha", "Digite um e-mail válido");
+      return;
+    }
+
+    auth().sendPasswordResetEmail(email)
+    .then(() => {
+      Alert.alert("Redefinir senha", "Enviaremos um e-mail para voçê");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
   }
 
-  function handleRegister() {
-    signUp(email, password);
-    navigation.navigate("home");
+  function handleRedirectToRegister() {
+    navigation.navigate("register");
   }
 
   return (
@@ -68,32 +82,24 @@ export function Login() {
             textContentType="password"
             placeholder="Digite sua senha"
           />
-          
           <Button
-            title="Login"
-            onPress={handleLogin}
+            title="Entrar"
+            onPress={handleSignIn}
           />
 
-          <Button
-            title="Registrar"
-            onPress={handleRegister}
-          />
-
-          {authState === AuthState.LoginError && (
+          {error !== '' && (
             <Subtext>
-              There was an error logging in, please try again
+              Ocorreu um erro ao tentar fazer login
+              <AltSubtext>{error}</AltSubtext>
             </Subtext>
           )}
-          {authState === AuthState.RegisterError && (
-            <Subtext>
-              There was an error registering, <AltSubtext>please try again</AltSubtext>
-            </Subtext>
-          )}
-        
           <BottomWrapper>
-            <TouchableOpacity onPress={gotoRegister}>
+            <TouchableOpacity onPress={handleRedirectToRegister}>
               <Subtext>Não tem cadastro? <AltSubtext>Clique aqui</AltSubtext>
               </Subtext>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleForgotPassword}>
+              <AltSubtext>Esqueci a senha</AltSubtext>
             </TouchableOpacity>
           </BottomWrapper>
         </Form>

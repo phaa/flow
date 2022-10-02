@@ -1,24 +1,35 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { Container } from './styles';
 
+// Custom Components
+import { Container } from './styles'; 
 import { Header } from '../../components/Header';
-import { Orders } from '../../components/Orders';
-import { FloatingButton } from '../../components/FloatingButton';
+import { FormsManager } from '../../components/Forms';
+import { Button } from '../../components/Button';
 
-export function Home() {
+// Firebase Authentication
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+
+export const Home: React.FC = () => {
+
   const navigation = useNavigation();
+  const user: FirebaseAuthTypes.User = auth().currentUser;
+  
+  //console.log(user); // debug
 
-  function handleNewOrder() {
+  function handleGotoNewForm() {
     navigation.navigate("form1");
   }
 
   return (
     <Container>
-      <Header />
-      <Orders />
 
-      <FloatingButton icon="add" onPress={handleNewOrder}/>
+      <Header userName={user.displayName} userEmail={user.email}/>
+
+      <FormsManager userId={user.uid}/>
+
+      <Button title="Registrar" onPress={handleGotoNewForm} />
+      
     </Container>
   );
 }
