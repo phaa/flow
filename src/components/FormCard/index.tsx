@@ -29,7 +29,7 @@ type Props = PressableProps & {
   form: FormItemProps;
 };
  
-export const FormItem: React.FC<Props> = ({ form, ...rest }) => {
+export const FormCard: React.FC<Props> = ({ form, ...rest }) => {
   
   const theme = useTheme();
   

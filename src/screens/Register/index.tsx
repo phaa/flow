@@ -9,7 +9,7 @@ import auth from '@react-native-firebase/auth';
 import { Container, RoundContainer, Form, Subtext, AltSubtext } from '../../components/BaseComponents/styles';
 import { AuthHeader } from '../../components/AuthHeader';
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
+import { Input } from '../../components/FormControls/Input';
 
 export const Register: React.FC = () => {
   const navigation = useNavigation();

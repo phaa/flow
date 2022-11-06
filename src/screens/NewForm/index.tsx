@@ -8,7 +8,7 @@ import firestore from '@react-native-firebase/firestore';
 
 // Custom components
 import { Container, Header, Title, Form } from './styles';
-import { Input } from '../../components/Input';
+import { Input } from '../../components/FormControls/Input';
 import { Button } from '../../components/Button';
 import { IconButton } from '../../components/IconButton';
 
@@ -18,7 +18,7 @@ export const NewForm: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [description, setDescription] = useState<string>('');
   const [questionCount, setQuestionCount] = useState<string>('');
-
+ 
   function handleBack() {
     navigation.goBack();
   }

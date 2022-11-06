@@ -46,7 +46,7 @@ export function Datepicker({ label, ...rest }: Props) {
         <DateTimePicker
           testID="dateTimePicker"
           value={date}
-          mode={mode}
+          mode='date'
           is24Hour={true}
           onChange={onChange}
         />

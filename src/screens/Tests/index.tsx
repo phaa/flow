@@ -1,40 +1,121 @@
-
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, } from 'react-native';
+import Swiper from 'react-native-swiper';
+import { Alert } from "react-native";
 import { useNavigation } from '@react-navigation/native';
-
-//Formulario 2
-
-
-
-
-
-import Swiper from 'react-native-swiper'
-import { CheckBox } from '../../components/CheckBox';
+import { useTheme } from 'styled-components/native';
 import { IconButton } from '../../components/IconButton';
-import { Input, BareLabel } from '../../components/Input';
-import { MyStepIndicator } from '../../components/StepIndicator';
-import { CustomSlider } from '../../components/Slider';
-import { Container, Header, Title, Form, TitleWrapper, Slide, SliderDot, SliderActiveDot } from './styles';
+import { StepIndicator } from '../../components/StepIndicator';
+import { Container, Header, Title, TitleWrapper } from './styles';
 
-export function Form1() {
+// Firebase authentication
+import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
+import firestore from '@react-native-firebase/firestore';
+
+import { Form1 } from './forms/form1';
+import { Form2 } from './forms/form2';
+import { Form3 } from './forms/form3';
+import { Form4 } from './forms/form4';
+import { Form5 } from './forms/form5';
+import { Form6 } from './forms/form6';
+import { Button } from '../../components/Button';
+
+export function FormTest() {
+  const user: FirebaseAuthTypes.User = auth().currentUser;
+  const { COLORS } = useTheme();
   const navigation = useNavigation();
   const [currentPage, setCurrentPage] = useState<number>(0);
-  const [checkboxState, setCheckboxState] = useState(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [currentHour, setCurrentHour] = useState(new Date());
-  const labels: string[] = ['', '', '', '','','']; 
 
+  // Forms data
+  const [form1Data, setForm1Data] = useState({
+    q1: null, q2: null, q3: null, q4: null, q5: null,
+  });
 
-  const slide1Captions: string[] = ['Pouco', 'Parcialmente', 'Bastante'];
+  const [form2Data, setForm2Data] = useState({
+    q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null,
+  });
 
+  const [form3Data, setForm3Data] = useState({
+    q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null, 
+    q8: null, q9: null, q10: null, q11: null, q12: null, q13: null, q14: null,
+  }); 
+  
+  const [form4Data, setForm4Data] = useState({
+    q1: null,
+    q2: null,
+  });
+
+  const [form5Data, setForm5Data] = useState({
+    q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null, 
+    q8: null, q9: null, q10: null, q11: null, q12: null, q13: null, q14: null,
+  });
+
+  const [form6Data, setForm6Data] = useState({
+    q1: null, q2: null, q3: null,
+  });
+
+  // verifica se o usuário respondeu todas as questões de cada formulário
+  function checkAnswers() {
+    console.log("Verificando...");
+    Object.keys(form1Data).forEach((key, index) => {
+      if (form1Data[key] == null) return;
+    });
+
+    Object.keys(form2Data).forEach((key, index) => {
+      if (form2Data[key] == null) return;
+    });
+
+    Object.keys(form3Data).forEach((key, index) => {
+      if (form3Data[key] == null) return;
+    });
+
+    Object.keys(form4Data).forEach((key, index) => {
+      if (form4Data[key] == null) return;
+    });
+
+    Object.keys(form5Data).forEach((key, index) => {
+      if (form5Data[key] == null) return;
+    });
+
+    Object.keys(form6Data).forEach((key, index) => {
+      if (form6Data[key] == null) return;
+    });
+    console.log("Todas respondidas");
+  }
 
   function handleNewOrder() {
-    navigation.navigate("home");
+    setIsLoading(true);
+
+    firestore()
+    .collection('forms')
+    .add({
+      form1Data,
+      form2Data,
+      form3Data,
+      form4Data,
+      form5Data,
+      form6Data,
+      status: 'finished', // pode ter finished ou pendente
+      createdAt: firestore.FieldValue.serverTimestamp(),
+      userId: user.uid
+    })
+    .then(() => {
+      Alert.alert(
+        "Formulário",
+        "Formulário enviado com sucesso!",
+        [
+          { text: "OK", onPress: () => navigation.goBack() }
+        ]
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+    })
+    .finally(() => {
+      setIsLoading(false);
+    });
   }
-  
-  function onStepPress(position: number) {
-    setCurrentPage(position);
-  };
 
   function getHour() {
     const d = currentHour;
@@ -47,196 +128,23 @@ export function Form1() {
         <TitleWrapper>
           <Title>Novo Formulário ({getHour()})</Title>
         </TitleWrapper>
-        <IconButton icon="chevron-left" onPress={handleNewOrder} />
-        <MyStepIndicator 
+        <IconButton icon="chevron-left" onPress={() => navigation.goBack()} />
+        <StepIndicator 
           currentPosition={currentPage} 
-          labels={labels} 
-          onPress={onStepPress} 
-          stepCount={labels.length}
+          labels={['', '', '', '','','']} 
+          stepCount={6}
         />
       </Header>
-      
-      <Form >
-          <Swiper
-            showsButtons={false}
-            loop={false} 
-            index={currentPage} 
-            autoplay={false}
-            onIndexChanged={(page) => {
-              onStepPress(page);
-            }}
-            dot={ <SliderDot/> }
-            activeDot={ <SliderActiveDot/> }
-          >
-            <Slide contentContainerStyle={{flexGrow: 1}}>
-              <Input label="1. Horario em que foi notificado:" />
-              <Input label="2. Quando você foi notificado, no que estava pensando?" />
-              <Input label="4. Qual era a PRINCIPAL coisa que você estava fazendo?" />
-              <Input label="5. Que outras coisas você estava fazendo?" />
-              <Input label="6. Por que você estava fazendo essa atividade especifica?" noInput={true}/>
 
-              <CheckBox 
-                text="Eu tinha quer fazer" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Eu queria fazer" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Eu não tinha outra coisa para fazer" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              
-              <Input label="" noInput={true}/>
-            </Slide>
-            <Slide>
-
-              <BareLabel label="1. Você estava bem concentrado?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="2. Estava dificil de se concentrar?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="3. Você estava consciente de si mesmo?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="4. Você estava se sentindo bem consigo mesmo?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="5. Você estava no controle da situação?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="6. Você estava correspondendo as suas próprias expectativas?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <BareLabel label="7. Você estava correspondendo as expectativas dos outros?">
-                <CustomSlider captions={slide1Captions}/>
-              </BareLabel>
-
-              <Input label="" noInput={true}/>
-            </Slide>
-            <Slide>
-              <BareLabel label="1. Descreva seu estado de espiríto ao ser notificado:">
-                <CustomSlider captions={['Alerta', 'Sonolento']}/>
-                <CustomSlider captions={['Feliz', 'Triste']}/>
-                <CustomSlider captions={['Irritado', 'Animado']}/>
-                <CustomSlider captions={['Forte', 'Fraco']}/>
-                <CustomSlider captions={['Ativo', 'Passivo']}/>
-                <CustomSlider captions={['Solitário', 'Sociável']}/>
-                <CustomSlider captions={['Envergonhado', 'Orgulhoso']}/>
-                <CustomSlider captions={['Envolvido', 'Distante']}/>
-                <CustomSlider captions={['Entusiasmado', 'Entendiado']}/>
-                <CustomSlider captions={['Fechado', 'Aberto']}/>
-                <CustomSlider captions={['Claro', 'Confuso']}/>
-                <CustomSlider captions={['Tenso', 'Relaxado']}/>
-                <CustomSlider captions={['Competitivo', 'Cooperativo']}/>
-              </BareLabel>
-
-              <BareLabel label="2. Dor ou desconforto geral?">
-                <CustomSlider maxValue={3} captions={['Nenhum', 'Leve', 'Incômodo', 'Severo']}/>
-              </BareLabel>
-
-              <Input label="" noInput={true}/>
-            </Slide>
-            <Slide>
-              <Input label="1. Com que você estava?" noInput={true} />
-              <CheckBox 
-                text="Sozinho" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Amigo" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Mãe" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Pai" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Irmão ou irmã" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Estranho" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <CheckBox 
-                text="Outros" 
-                isChecked={checkboxState} 
-                onPress={() => setCheckboxState(!checkboxState)}
-              />
-              <Input label="Se selecionar outros, especifique:" />
-              <Input label="" noInput={true}/>
-            </Slide>
-            <Slide>
-              <BareLabel label="1. Nível de desafio da atividade">
-                <CustomSlider captions={['Fácil', 'Difícil']}/>
-              </BareLabel>
-
-              <BareLabel label="2. Seu nível de habilidade na atividade:">
-                <CustomSlider captions={['Pouco', 'Habilidoso(a)']}/>
-              </BareLabel>
-
-              <BareLabel label="3. Essa atividade era importante para você?">
-                <CustomSlider captions={['Pouco', 'Muito']}/>
-              </BareLabel>
-
-              <BareLabel label="4. Essa atividade era importante para outras pessoas?">
-                <CustomSlider captions={['Pouco', 'Muito']}/>
-              </BareLabel>
-
-              <BareLabel label="5. Você estava tendo sucesso no que estava fazendo?">
-                <CustomSlider captions={['Pouco', 'Muito']}/>
-              </BareLabel>
-
-              <BareLabel label="6. Você gostaria de esta fazendo outra coisa?">
-                <CustomSlider captions={['Pouco', 'Bastante']}/>
-              </BareLabel>
-
-              <BareLabel label="7. Você estava satisfeito com seu desempenho?">
-                <CustomSlider captions={['Pouco', 'Muito']}/>
-              </BareLabel>
-
-              <BareLabel label="8. Quão importante era essa atividade em relação aos seus objetivos gerais?">
-                <CustomSlider captions={['Pouco', 'Muito']}/>
-              </BareLabel>
-              
-              <Input label="" noInput={true}/>
-            </Slide>
-            <Slide>
-              <Input label="1. Se você tivesse escolha... Com quem você estaria?" />
-              <Input label="2. O que você estaria fazendo?" />
-              <Input label="3. Desde a sua última notificação, aconteceu alguma coisa ou você fez alguma coisa que possa ter afetado a maneira como se sente?" />
-            </Slide>
-          </Swiper>
-        </Form>
+      <Swiper onIndexChanged={index => { setCurrentPage(index) }} index={currentPage} showsButtons={false} loop={false} showsPagination={false}>
+        <Form1 formData={form1Data} setData={setForm1Data}/>
+        <Form2 formData={form2Data} setData={setForm2Data}/>
+        <Form3 formData={form3Data} setData={setForm3Data}/>
+        <Form4 formData={form4Data} setData={setForm4Data}/>
+        <Form5 formData={form5Data} setData={setForm5Data}/>
+        <Form6 formData={form6Data} setData={setForm6Data} handleNewForm={checkAnswers} isLoading={isLoading}/>
+      </Swiper>
+    
     </Container>
   );
 }
-const styles = StyleSheet.create({
-  text: {
-    color: '#999',
-    fontSize: 30,
-    fontWeight: 'bold'
-  },
-})

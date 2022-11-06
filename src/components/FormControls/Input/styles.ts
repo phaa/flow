@@ -2,10 +2,10 @@ import styled from 'styled-components/native';
 import { TextInput, TextInputProps } from 'react-native';
 
 export const Container = styled.View`
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 `;
 
-export const CustomInput = styled(TextInput).attrs<TextInputProps>(({ theme }) => ({
+export const Input = styled(TextInput).attrs<TextInputProps>(({ theme }) => ({
   placeholderTextColor: theme.COLORS.SUBTEXT
 })) <TextInputProps>`
   width: 100%;

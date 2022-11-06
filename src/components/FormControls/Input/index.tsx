@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextInputProps } from 'react-native';
 
-import { Container, CustomInput, Label, FeedbackText } from './styles';
+import { Container, Input as StyledInput, Label, FeedbackText } from './styles';
 
 type Props = TextInputProps & {
   label?: string;
@@ -9,32 +9,24 @@ type Props = TextInputProps & {
   noInput?: boolean;
 };
 
-export function Input({ label="", feedbackText="", noInput, ...rest }: Props) {
+export function Input({ label, feedbackText, noInput, ...rest }: Props) {
   return (
     <Container>
-      { label!="" && (
-        <Label>{label}</Label>
-      )}
-      
-      { !noInput && (
-        <CustomInput {...rest} />
-      )}
-      
-      { feedbackText!="" && (
+      <Label>{label}</Label>
+      <StyledInput {...rest} />
+      { feedbackText != null && (
         <FeedbackText>{feedbackText}</FeedbackText>
       )}
       
     </Container>
-    
   );
 }
 
-export function BareLabel(props) {
+export function LoneLabel(props: any) {
   return (
     <Container>
       <Label>{props.label}</Label>
       { props.children }
     </Container>
-    
   );
 }

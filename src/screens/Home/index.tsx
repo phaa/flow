@@ -14,11 +14,9 @@ export const Home: React.FC = () => {
 
   const navigation = useNavigation();
   const user: FirebaseAuthTypes.User = auth().currentUser;
-  
-  //console.log(user); // debug
 
   function handleGotoNewForm() {
-    navigation.navigate("form1");
+    navigation.navigate("formtest");
   }
 
   return (
@@ -28,7 +26,7 @@ export const Home: React.FC = () => {
 
       <FormsManager userId={user.uid}/>
 
-      <Button title="Registrar" onPress={handleGotoNewForm} />
+      <Button title="Novo" onPress={handleGotoNewForm} />
       
     </Container>
   );

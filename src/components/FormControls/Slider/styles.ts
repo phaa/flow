@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 import styled from 'styled-components/native';
-import THEME from '../../theme/index';
+import THEME from '../../../theme/index';
 
 export const CustomStyles3 = StyleSheet.create({
   thumb: {
@@ -24,6 +24,7 @@ export const Row = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 10px;
 `;
 
 export const Caption = styled.Text`

@@ -8,8 +8,8 @@ import firestore from '@react-native-firebase/firestore';
 import { Load } from '../Load';
 import { Filters } from '../Filters';
 import { Container, Header, Title, Counter } from './styles';
-import { FormItem } from '../FormItem';
-import { FormItemProps } from '../FormItem/';
+import { FormCard } from '../FormCard';
+import { FormItemProps } from '../FormCard';
 
 type ManagerType = {
   userId: string;
@@ -31,7 +31,6 @@ export const FormsManager: React.FC<ManagerType> = ({ userId }) => {
     .orderBy('createdAt', 'desc')
     .onSnapshot(querySnapshot => {
       const data = querySnapshot.docs.map(doc => {
-
         return {
           id: doc.id, // o Id está um nível acima
           ...doc.data() // desestrutura o documento 
@@ -62,7 +61,7 @@ export const FormsManager: React.FC<ManagerType> = ({ userId }) => {
             data={forms}
             keyExtractor={form => form.id}
             renderItem={({item}) => (
-              <FormItem form={item} />
+              <FormCard form={item} />
             )}
             contentContainerStyle={{ paddingBottom: 100 }}
             showsVerticalScrollIndicator={false}

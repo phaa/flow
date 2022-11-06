@@ -7,9 +7,10 @@ import { Container } from './styles';
 
 type Props = TouchableOpacityProps & {
   icon: keyof typeof MaterialIcons.glyphMap;
+  color?: any;
 }
 
-export function IconButton({ icon, ...rest }: Props) {
+export function IconButton({ icon, color, ...rest }: Props) {
   const { COLORS } = useTheme();
 
   return (
@@ -17,7 +18,7 @@ export function IconButton({ icon, ...rest }: Props) {
       <MaterialIcons
         name={icon}
         size={28}
-        color={COLORS.SUBTEXT}
+        color={(color == null) ? COLORS.SUBTEXT : color}
       />
     </Container>
   )

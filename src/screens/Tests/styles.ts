@@ -1,21 +1,22 @@
-import { SafeAreaView, ScrollView } from 'react-native';
+import { SafeAreaView, ScrollView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components/native';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
   justify-content:center;
-  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
+  background-color: ${({ theme }) => theme.COLORS.WHITE};
 `;
 
 export const Header = styled.View`
   width: 100%;
-  margin-top: 20px;
+  padding-top: 28px;
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
 `;
 
 export const TitleWrapper = styled.View`
   position: absolute;
   width: 100%;
-  margin-top: 13px
+  margin-top: 41px
 `;
 
 export const Title = styled.Text`
@@ -27,29 +28,10 @@ export const Title = styled.Text`
   margin-bottom: 0px;
 `;
 
-export const Form = styled.View`
+export const Form = styled(ScrollView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.WHITE};
-`;
-
-export const Slide = styled(ScrollView)`
   padding: 20px;
 `;
 
-export const SliderDot = styled.View`
-  background-color: ${({ theme }) => theme.COLORS.BORDER};
-  width: 0px;
-  height: 0px;
-  border-radius: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
-`;
-
-export const SliderActiveDot = styled.View`
-  background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-  width: 0px;
-  height: 0px;
-  border-radius: 7px;
-  margin-left: 7px;
-  margin-right: 7px;
+export const NextBtnWrapper = styled.View`
 `;

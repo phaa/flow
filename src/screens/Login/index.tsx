@@ -11,7 +11,7 @@ import { Container, RoundContainer, Form, Subtext, BottomWrapper, AltSubtext } f
 // Custom components
 import { AuthHeader } from '../../components/AuthHeader';
 import { Button } from '../../components/Button';
-import { Input } from '../../components/Input';
+import { Input } from '../../components/FormControls/Input';
 
 export const Login: React.FC = () => {
   const navigation = useNavigation();

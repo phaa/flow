@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View } from 'react-native';
-import StepIndicator from 'react-native-step-indicator';
+import OriginalIndicator from 'react-native-step-indicator-v2';
 import theme from '../../theme';
 
 import { Container, Label, SelectedLabel } from './styles';
@@ -12,7 +12,7 @@ type LabelControl =  {
   currentPosition: number;
 };
 
-export function MyStepIndicator({ ...rest }) {
+export function StepIndicator({ ...rest }) {
   const [position, setPosition] = useState<number>(0);
 
   // Se a posição for alterada devido a uma modificação nas props, atualize
@@ -41,6 +41,7 @@ export function MyStepIndicator({ ...rest }) {
     labelColor: '#999999',
     labelSize: 12,
     currentStepLabelColor: theme.COLORS.PRIMARY,
+    borderRadiusSize: 30,
   };
 
   // Se a posição for alterada por um clique no step, atualize
@@ -61,7 +62,7 @@ export function MyStepIndicator({ ...rest }) {
 
   return (
     <Container>
-      <StepIndicator
+      <OriginalIndicator
           customStyles={firstIndicatorStyles}
           renderLabel={renderLabel}
           {...rest}
