@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 import { useTheme } from 'styled-components/native';
 import { IconButton } from '../../components/IconButton';
 import { StepIndicator } from '../../components/StepIndicator';
-import { Container, Header, Title, TitleWrapper, NextBtnWrapper } from './styles';
+import { Container, Header, Title, TitleWrapper, BtnWrapper } from './styles';
 
 import { Form1 } from './forms/form1';
 import { Form2 } from './forms/form2';
@@ -96,9 +96,9 @@ export function FormTest() {
         <Form6/>
       </Swiper>
 
-      <NextBtnWrapper>
+      <BtnWrapper>
         <Button title="Próximo" onPress={() => {}} />
-      </NextBtnWrapper>
+      </BtnWrapper>
     
     </Container>
   );

@@ -18,7 +18,7 @@ type ManagerType = {
 export const FormsManager: React.FC<ManagerType> = ({ userId }) => {
   
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [status, setStatus] = useState<string>('pending');
+  const [status, setStatus] = useState<string>('finished');
   const [forms, setForms] = useState<FormItemProps[] | []>([]);
 
   useEffect(() => {
@@ -44,9 +44,10 @@ export const FormsManager: React.FC<ManagerType> = ({ userId }) => {
     return () => subscribe();
   }, [status]);
 
+  //<Filters onFilter={setStatus} />
   return (
     <Container>
-      <Filters onFilter={setStatus} />
+      
 
       <Header>
         <Title>Formulários preenchidos:</Title>

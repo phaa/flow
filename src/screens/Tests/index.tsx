@@ -43,7 +43,7 @@ export function FormTest() {
   
   const [form4Data, setForm4Data] = useState({
     q1: null,
-    q2: null,
+    q2: "", // opcional
   });
 
   const [form5Data, setForm5Data] = useState({
@@ -58,30 +58,43 @@ export function FormTest() {
   // verifica se o usuário respondeu todas as questões de cada formulário
   function checkAnswers() {
     console.log("Verificando...");
+    let notAnswered = 0;
     Object.keys(form1Data).forEach((key, index) => {
-      if (form1Data[key] == null) return;
+      if (form1Data[key] == null) notAnswered++;
     });
 
     Object.keys(form2Data).forEach((key, index) => {
-      if (form2Data[key] == null) return;
+      if (form2Data[key] == null) notAnswered++;
     });
 
     Object.keys(form3Data).forEach((key, index) => {
-      if (form3Data[key] == null) return;
+      if (form3Data[key] == null) notAnswered++;
     });
 
     Object.keys(form4Data).forEach((key, index) => {
-      if (form4Data[key] == null) return;
+      if (form4Data[key] == null) notAnswered++;
     });
 
     Object.keys(form5Data).forEach((key, index) => {
-      if (form5Data[key] == null) return;
+      if (form5Data[key] == null) notAnswered++;
     });
 
     Object.keys(form6Data).forEach((key, index) => {
-      if (form6Data[key] == null) return;
+      if (form6Data[key] == null) notAnswered++;
     });
-    console.log("Todas respondidas");
+    
+    if (notAnswered > 0) {
+      Alert.alert(
+        "Formulário",
+        `Faltam ${notAnswered} questões para responder!`,
+        [
+          { text: "OK" }
+        ]
+      );
+    } else {
+      console.log("Formulário pronto para enviar")
+      handleNewOrder();
+    }
   }
 
   function handleNewOrder() {
@@ -90,12 +103,12 @@ export function FormTest() {
     firestore()
     .collection('forms')
     .add({
-      form1Data,
-      form2Data,
-      form3Data,
-      form4Data,
-      form5Data,
-      form6Data,
+      form1: form1Data,
+      form2: form2Data,
+      form3: form3Data,
+      form4: form4Data,
+      form5: form5Data,
+      form6: form6Data,
       status: 'finished', // pode ter finished ou pendente
       createdAt: firestore.FieldValue.serverTimestamp(),
       userId: user.uid
@@ -120,7 +133,18 @@ export function FormTest() {
   function getHour() {
     const d = currentHour;
     return `${('0' + d.getDate()).slice(-2)}/${('0' + (d.getMonth()+1)).slice(-2)} - ${('0'+d.getHours()).slice(-2)}:${('0' + d.getMinutes()).slice(-2)}`;
-  };
+  }
+
+  function goBack() {
+    Alert.alert(
+      "Formulário",
+      "Deseja sair?\nSuas respostas não serão salvas.",
+      [
+        { text: "OK", onPress: () => navigation.goBack() },
+        { text: "Ficar", onPress: () => {} }
+      ]
+    );
+  }
 
   return (
     <Container>
@@ -128,15 +152,16 @@ export function FormTest() {
         <TitleWrapper>
           <Title>Novo Formulário ({getHour()})</Title>
         </TitleWrapper>
-        <IconButton icon="chevron-left" onPress={() => navigation.goBack()} />
+        <IconButton icon="chevron-left" onPress={goBack} />
         <StepIndicator 
           currentPosition={currentPage} 
           labels={['', '', '', '','','']} 
           stepCount={6}
+          onPress={index => { setCurrentPage(index) }} 
         />
       </Header>
 
-      <Swiper onIndexChanged={index => { setCurrentPage(index) }} index={currentPage} showsButtons={false} loop={false} showsPagination={false}>
+      <Swiper onIndexChanged={index => { setCurrentPage(index) }} scrollEnabled={false} index={currentPage} showsButtons={false} loop={false} showsPagination={false}>
         <Form1 formData={form1Data} setData={setForm1Data}/>
         <Form2 formData={form2Data} setData={setForm2Data}/>
         <Form3 formData={form3Data} setData={setForm3Data}/>
@@ -147,4 +172,5 @@ export function FormTest() {
     
     </Container>
   );
+  //onIndexChanged={index => { setCurrentPage(index) }}
 }

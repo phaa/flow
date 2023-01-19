@@ -24,7 +24,7 @@ export const Form3 = ({formData, setData}: Props) => {
   const [q11, setQ11] = useState<number>(0);
   const [q12, setQ12] = useState<number>(0);
   const [q13, setQ13] = useState<number>(0);
-  const [q14, setQ14] = useState<string>("");
+  const [q14, setQ14] = useState<string>(null);
 
   //Somente quando algum valor de um state muda que ele reseta o FormData
   useEffect(() => {

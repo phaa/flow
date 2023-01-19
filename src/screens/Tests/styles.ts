@@ -33,5 +33,9 @@ export const Form = styled(ScrollView)`
   padding: 20px;
 `;
 
-export const NextBtnWrapper = styled.View`
+export const BtnWrapper = styled.View`
+  padding: 0px 20px;
+  flexDirection: row;
+  flexWrap: wrap;
+  justify-content:space-between;
 `;

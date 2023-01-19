@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Form, NextBtnWrapper } from '../styles';
+import { Form, BtnWrapper } from '../styles';
 import { Input } from '../../../components/FormControls/Input';
 import { Button } from "../../../components/Button";
 
@@ -27,7 +27,7 @@ export const Form6 = ({formData, setData, isLoading, handleNewForm}: Props) => {
       />
       
       <Button
-        title="Salvar formulário"
+        title="Salvar respostas"
         isLoading={isLoading}
         onPress={handleNewForm}
       />
