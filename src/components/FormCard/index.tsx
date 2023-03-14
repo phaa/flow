@@ -36,10 +36,9 @@ export const FormCard: React.FC<Props> = ({ form, ...rest }) => {
   return (
     <Container>
       <Status status={form.status} />
-
       <Content>
         <Header>
-          <Title>{form.description}</Title>
+          <Title>Formulário {moment(form.createdAt).format("DD/MM - HH:MM")}</Title>
           <MaterialIcons
             name={form.status === "pending" ? "hourglass-empty" : "cloud-done"}
             size={26}
@@ -60,7 +59,7 @@ export const FormCard: React.FC<Props> = ({ form, ...rest }) => {
           <Info>
             <MaterialIcons name="assignment" size={16} color={theme.COLORS.SUBTEXT} />
             <Label>
-              {form.questionCount} questões
+              39 questões
             </Label>
           </Info>
         </Footer>
