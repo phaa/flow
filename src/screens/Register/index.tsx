@@ -73,7 +73,7 @@ export const Register: React.FC = () => {
             autoCorrect={false}
             placeholder="Digite seu primeiro nome ou apelido"
           />
-
+ 
           <Input
             label="Email"
             value={email}
