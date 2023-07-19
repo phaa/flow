@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
+import * as NavigationBar from 'expo-navigation-bar';
 
 // Firebase Authentication
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
@@ -9,12 +10,13 @@ import { AuthStack } from './authStack';
 import { UserStack } from './userStack';
 
 export const Routes: React.FC = () => {
+  const firebase = auth();
   const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
 
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(setUser);
+    const subscriber = firebase.onAuthStateChanged(setUser);
     return subscriber; // retorna uma função de limpeza para subscriber
-  });
+  }, []);
 
   return (
     <NavigationContainer>

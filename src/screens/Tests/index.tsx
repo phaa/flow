@@ -110,7 +110,7 @@ export function FormTest() {
       form5: form5Data,
       form6: form6Data,
       status: 'finished', // pode ter finished ou pendente
-      createdAt: firestore.FieldValue.serverTimestamp(),
+      createdAt: new Date(),
       userId: user.uid
     })
     .then(() => {
@@ -145,14 +145,14 @@ export function FormTest() {
       ]
     );
   }
+{/* <TitleWrapper>
+          <Title>Novo Formulário ({getHour()})</Title>
+        </TitleWrapper>
 
+        <IconButton icon="chevron-left" onPress={goBack} /> */}
   return (
     <Container>
       <Header>
-        <TitleWrapper>
-          <Title>Novo Formulário ({getHour()})</Title>
-        </TitleWrapper>
-        <IconButton icon="chevron-left" onPress={goBack} />
         <StepIndicator 
           currentPosition={currentPage} 
           labels={['', '', '', '','','']} 
@@ -167,7 +167,7 @@ export function FormTest() {
         <Form3 formData={form3Data} setData={setForm3Data}/>
         <Form4 formData={form4Data} setData={setForm4Data}/>
         <Form5 formData={form5Data} setData={setForm5Data}/>
-        <Form6 formData={form6Data} setData={setForm6Data} handleNewForm={checkAnswers} isLoading={isLoading}/>
+        <Form6 formData={form6Data} setData={setForm6Data} handleNewForm={handleNewOrder} isLoading={isLoading}/>
       </Swiper>
     
     </Container>

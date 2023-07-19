@@ -10,7 +10,7 @@ export function AuthHeader({ title, ...rest}: Props) {
   return (
     <Container>
       <Greeting>
-        <Logo source={require('./logo.png')}/>
+        <Logo source={require('./logo2_small.png')}/>
         <Title>{title}</Title>
       </Greeting>
     </Container>

@@ -48,7 +48,7 @@ export const FormsManager: React.FC<ManagerType> = ({ userId }) => {
   return (
     <Container>
       
-
+      <Filters onFilter={setStatus} />
       <Header>
         <Title>Formulários preenchidos:</Title>
         <Counter>{forms.length}</Counter>

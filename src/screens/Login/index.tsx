@@ -14,6 +14,7 @@ import { Button } from '../../components/Button';
 import { Input } from '../../components/FormControls/Input';
 
 export const Login: React.FC = () => {
+  const firebase = auth()
   const navigation = useNavigation();
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -28,7 +29,7 @@ export const Login: React.FC = () => {
 
     setIsLoading(true);
 
-    auth().signInWithEmailAndPassword(email, password)
+    firebase.signInWithEmailAndPassword(email, password)
     .then(() => {
     })
     .catch((error) => {
@@ -45,7 +46,7 @@ export const Login: React.FC = () => {
       return;
     }
 
-    auth().sendPasswordResetEmail(email)
+    firebase.sendPasswordResetEmail(email)
     .then(() => {
       Alert.alert("Redefinir senha", "Enviaremos um e-mail para voçê");
     })
@@ -60,7 +61,7 @@ export const Login: React.FC = () => {
 
   return (
     <Container>
-      <AuthHeader title="Login"/>
+      <AuthHeader title="LOGIN"/>
       <RoundContainer>
         <Form>
           <Input

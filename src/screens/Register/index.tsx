@@ -59,7 +59,7 @@ export const Register: React.FC = () => {
   return (
     <Container>
 
-      <AuthHeader title="Registrar"/>
+      <AuthHeader title="REGISTRO"/>
 
       <RoundContainer>
 
@@ -104,7 +104,7 @@ export const Register: React.FC = () => {
           {error !== '' && (
             <AltSubtext>{error}</AltSubtext>
           )}
-          <TouchableOpacity onPress={handleRedirectToLogin}>
+          <TouchableOpacity onPress={handleRedirectToLogin} style={{marginTop:'auto'}}>
 
             <Subtext>Já tem uma conta? <AltSubtext>Faça login</AltSubtext></Subtext>
 
