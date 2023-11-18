@@ -1,10 +1,5 @@
 import React from 'react';
-
-// Firebase Authentication
-import auth from '@react-native-firebase/auth';
-
-import { IconButton } from '../IconButton';
-import { Container, Greeting, Title, SubTitle } from './styles';
+import { Container, Greeting, Title, SubTitle, Container2, Logo } from './styles';
 
 type HeaderType = {
   userName: string;
@@ -12,19 +7,16 @@ type HeaderType = {
 }
 
 export const Header: React.FC<HeaderType> = ({ userName, userEmail }) => {
-  
-  function handleLogout() {
-    auth().signOut();
-  }
 
   return (
     <Container>
-      <Greeting>
-        <Title>{userName}</Title>
-        <SubTitle>{userEmail}</SubTitle>
-      </Greeting>
-
-      <IconButton icon="logout" onPress={handleLogout}/>
+      <Container2>
+        <Logo source={require('./logo.jpg')} />
+        <Greeting>
+          <Title>{userName}enrique</Title>
+          <SubTitle>{userEmail}</SubTitle>
+        </Greeting>
+      </Container2>
     </Container>
   );
 }

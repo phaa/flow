@@ -14,7 +14,6 @@ export function Filters({ onFilter }: Props) {
   return (
     <Container>
       <Title>Filtre pelo status dos formulários</Title>
-
       <Options>
         <Filter
           title="Pendente"

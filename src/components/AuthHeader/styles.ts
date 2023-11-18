@@ -7,8 +7,6 @@ export const Container = styled.View`
   margin-bottom: 40px;
 `;
 
-export const Greeting = styled.View``;
-
 export const Title = styled.Text`
   font-size: 24px;
   font-weight: bold;

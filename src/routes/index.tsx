@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from '@react-navigation/native';
-import * as NavigationBar from 'expo-navigation-bar';
 
 // Firebase Authentication
 import auth, { FirebaseAuthTypes } from '@react-native-firebase/auth';
