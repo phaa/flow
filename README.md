@@ -4,6 +4,10 @@
 
 [![License: Custom](https://img.shields.io/badge/license-Custom-blue.svg)](https://suap.ifrn.edu.br/verificar-documento-externo/)
 
+<p align="center">
+ <img src="https://github.com/phaa/flow/blob/main/flow.png" title="Screen" width="800" />
+</p>
+
 ## Descrição
 
 O Flow é um aplicativo mobile desenvolvido para ajudar atletas a treinar atenção plena, registrando informações sobre seu estado emocional e psicológico ao longo do tempo.  
