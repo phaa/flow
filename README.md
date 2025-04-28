@@ -1,80 +1,77 @@
 # Flow
 
-**Um aplicativo para apoio à atenção plena dos atletas**
+**An application to support athletes' mindfulness**
 
 [![License: Custom](https://img.shields.io/badge/license-Custom-blue.svg)](https://suap.ifrn.edu.br/verificar-documento-externo/)
 
 <p align="center">
- <img src="https://github.com/phaa/flow/blob/main/flow.png" title="Screen" width="800" />
+  <img src="https://github.com/phaa/flow/blob/main/flow.png" title="Screen" width="800" />
 </p>
 
-## Descrição
+## Description
 
-O Flow é um aplicativo mobile desenvolvido para ajudar atletas a treinar atenção plena, registrando informações sobre seu estado emocional e psicológico ao longo do tempo.  
-Utilizando tecnologias modernas como **React Native**, **Styled Components** e **Firebase**, o Flow proporciona uma experiência de uso fluida, segura e acessível tanto para Android quanto para iOS.
+Flow is a mobile application developed to help athletes practice mindfulness, recording information about their emotional and psychological state over time. Utilizing modern technologies such as **React Native**, **Styled Components**, and **Firebase**, Flow provides a fluid, secure, and accessible user experience for both Android and iOS.
 
-O aplicativo foi utilizado para a coleta de dados de atletas de handebol, alimentando a pesquisa de doutorado do professor **Luís Eugênio Martiny**.  
-Esse estudo investigou os efeitos do estado de flow e do mindfulness na inteligência tática de atletas de esportes coletivos, e pode ser consultado [neste link](https://estudogeral.uc.pt/handle/10316/117512).  
-Além disso, os resultados de pesquisas relacionadas ao tema foram publicados na revista FOCO, reforçando a relevância acadêmica do trabalho.
+The application was used to collect data from handball athletes, contributing to the doctoral research of professor **Luís Eugênio Martiny**. This study investigated the effects of flow state and mindfulness on the tactical intelligence of team sports athletes and can be consulted at [this link](https://estudogeral.uc.pt/handle/10316/117512). Furthermore, research findings related to the topic were published in the FOCO journal, reinforcing the academic relevance of the work.
 
-Este projeto integra pesquisa acadêmica do IFRN Campus Canguaretama e é oficialmente registrado no INPI【Registro de Software】.
+This project integrates academic research from IFRN Campus Canguaretama and is officially registered with the INPI【Software Registration】.
 
-## Sobre a Escolha das Tecnologias
+## About the Choice of Technologies
 
-Para maximizar a qualidade e a escalabilidade do projeto, foram escolhidas as seguintes tecnologias:
+To maximize the quality and scalability of the project, the following technologies were chosen:
 
-- **React Native**: Permitiu desenvolver uma aplicação nativa para Android e iOS com um único código-base, otimizando tempo de desenvolvimento e manutenção.
-- **Styled Components**: Facilitou a criação de interfaces modulares e reutilizáveis, promovendo um estilo consistente e de fácil manutenção no aplicativo.
-- **Firebase**: Foi utilizado para autenticação de usuários e armazenamento de dados na nuvem, garantindo segurança, confiabilidade e escalabilidade. Com isso, os dados dos atletas podem ser acessados de qualquer dispositivo em tempo real.
+- **React Native**: Enabled the development of a native application for Android and iOS with a single codebase, optimizing development and maintenance time.
+- **Styled Components**: Facilitated the creation of modular and reusable interfaces, promoting a consistent and easily maintainable style throughout the application.
+- **Firebase**: Was used for user authentication and cloud data storage, ensuring security, reliability, and scalability. This allows athletes' data to be accessed from any device in real-time.
 
-Essas escolhas foram fundamentais para alinhar o desenvolvimento do Flow com os princípios de mobilidade, alta disponibilidade e experiência de usuário de qualidade.
+These choices were fundamental in aligning Flow's development with the principles of mobility, high availability, and quality user experience.
 
-## Funcionalidades
+## Features
 
-- Cadastro e autenticação de usuários
-- Preenchimento de formulários de autoavaliação em múltiplas etapas
-- Histórico completo de respostas, com registro de data e hora
-- Interface intuitiva e moderna
+- User registration and authentication
+- Multi-step self-assessment form completion
+- Complete response history with date and time recording
+- Intuitive and modern interface
 
-## Tecnologias utilizadas
+## Technologies Used
 
 - [React Native](https://reactnative.dev/)
 - [Styled Components](https://styled-components.com/)
 - [Firebase](https://firebase.google.com/)
-- [Figma](https://www.figma.com/) (para o design das telas)
+- [Figma](https://www.figma.com/) (for screen design)
 
-## Utilização
+## Usage
 
-Clone o projeto:
+Clone the project:
 ```bash
 git clone https://github.com/phaa/flow.git
 ```
 
-Instale as dependências:
+Install dependencies:
 ```bash
 yarn install
 ```
 
-Inicie o expo:
+Start Expo:
 ```bash
 npm start
 ```
 
-## Estrutura de pastas
+## Folder estructure
 ```bash
 flow/
 ├── src/
-│   ├── components/     # Componentes reutilizáveis
-│   ├── screens/        # Telas principais (Login, Formulários, Histórico)
-│   ├── services/       # Integrações com Firebase (auth e database)
-│   └── utils/          # Funções auxiliares e helpers
-├── artigos/            # Artigos relacionados ao projeto (ex: resumo da CONGIC)
-├── registros/          # Documentos de registro (ex: registro no INPI)
-├── App.js              # Ponto de entrada da aplicação
+│   ├── components/     # Reusable components
+│   ├── routes/         # Application routes
+│   ├── screens/        # Main screens (Login, Forms, History)
+│   └── theme/          # Styled components variables
+├── android/            # Android native folder
+├── registro-software/  # Registration documents (e.g., INPI registration)
+├── App.js              # Application entry point
 ├── package.json
 └── README.md
 ```
 
-## Licença
-Este software é registrado sob o Instituto Federal de Educação, Ciência e Tecnologia do Rio Grande do Norte (IFRN) e protegido conforme certificado de registro no INPI.
-Todos os direitos reservados aos autores: Pedro Henrique Amorim de Azevedo, Tatiana Amaral Sorrentino e Luís Eugênio Martiny. 
+## License
+This software is registered under the Federal Institute of Education, Science and Technology of Rio Grande do Norte (IFRN) and protected according to the INPI registration certificate.
+All rights reserved to the authors: Pedro Henrique Amorim de Azevedo, Tatiana Amaral Sorrentino, and Luís Eugênio Martiny. 
